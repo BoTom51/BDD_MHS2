@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\MonsterRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: MonsterRepository::class)]
@@ -54,18 +56,6 @@ class Monster
     #[ORM\ManyToOne(inversedBy: 'attack_type_3_monsters_fk')]
     private ?CombinationAttackTypeState $attack_type_3_monster_fk = null;
 
-    #[ORM\ManyToOne(inversedBy: 'slash_monsters_fk')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?CombinationWeaponDamageTypeMonsterPart $slash_monster_fk = null;
-
-    #[ORM\ManyToOne(inversedBy: 'blunt_monsters_fk')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?CombinationWeaponDamageTypeMonsterPart $blunt_monster_fk = null;
-
-    #[ORM\ManyToOne(inversedBy: 'pierce_monsters_fk')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?CombinationWeaponDamageTypeMonsterPart $pierce_monster_fk = null;
-
     #[ORM\ManyToOne(inversedBy: 'monsters_fk')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Location $location_monster_fk = null;
@@ -76,6 +66,14 @@ class Monster
 
     #[ORM\ManyToOne(inversedBy: 'monsters_fk')]
     private ?CombinationMonsterRidingAction $riding_action_monster_fk = null;
+
+    #[ORM\OneToMany(mappedBy: 'monster_combination_weapon_damage_type_monster_part_fk', targetEntity: SensitivityWeaponDamageTypeMonsterPart::class)]
+    private Collection $sensitivity_weapon_damage_type_monster_parts_fk;
+
+    public function __construct()
+    {
+        $this->sensitivity_weapon_damage_type_monster_parts_fk = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -226,42 +224,6 @@ class Monster
         return $this;
     }
 
-    public function getSlashMonsterFk(): ?CombinationWeaponDamageTypeMonsterPart
-    {
-        return $this->slash_monster_fk;
-    }
-
-    public function setSlashMonsterFk(?CombinationWeaponDamageTypeMonsterPart $slash_monster_fk): self
-    {
-        $this->slash_monster_fk = $slash_monster_fk;
-
-        return $this;
-    }
-
-    public function getBluntMonsterFk(): ?CombinationWeaponDamageTypeMonsterPart
-    {
-        return $this->blunt_monster_fk;
-    }
-
-    public function setBluntMonsterFk(?CombinationWeaponDamageTypeMonsterPart $blunt_monster_fk): self
-    {
-        $this->blunt_monster_fk = $blunt_monster_fk;
-
-        return $this;
-    }
-
-    public function getPierceMonsterFk(): ?CombinationWeaponDamageTypeMonsterPart
-    {
-        return $this->pierce_monster_fk;
-    }
-
-    public function setPierceMonsterFk(?CombinationWeaponDamageTypeMonsterPart $pierce_monster_fk): self
-    {
-        $this->pierce_monster_fk = $pierce_monster_fk;
-
-        return $this;
-    }
-
     public function getLocationMonsterFk(): ?Location
     {
         return $this->location_monster_fk;
@@ -294,6 +256,36 @@ class Monster
     public function setRidingActionMonsterFk(?CombinationMonsterRidingAction $riding_action_monster_fk): self
     {
         $this->riding_action_monster_fk = $riding_action_monster_fk;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, SensitivityWeaponDamageTypeMonsterPart>
+     */
+    public function getSensitivityWeaponDamageTypeMonsterPartsFk(): Collection
+    {
+        return $this->sensitivity_weapon_damage_type_monster_parts_fk;
+    }
+
+    public function addSensitivityWeaponDamageTypeMonsterPartsFk(SensitivityWeaponDamageTypeMonsterPart $sensitivityWeaponDamageTypeMonsterPartsFk): self
+    {
+        if (!$this->sensitivity_weapon_damage_type_monster_parts_fk->contains($sensitivityWeaponDamageTypeMonsterPartsFk)) {
+            $this->sensitivity_weapon_damage_type_monster_parts_fk->add($sensitivityWeaponDamageTypeMonsterPartsFk);
+            $sensitivityWeaponDamageTypeMonsterPartsFk->setMonsterCombinationWeaponDamageTypeMonsterPartFk($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSensitivityWeaponDamageTypeMonsterPartsFk(SensitivityWeaponDamageTypeMonsterPart $sensitivityWeaponDamageTypeMonsterPartsFk): self
+    {
+        if ($this->sensitivity_weapon_damage_type_monster_parts_fk->removeElement($sensitivityWeaponDamageTypeMonsterPartsFk)) {
+            // set the owning side to null (unless already changed)
+            if ($sensitivityWeaponDamageTypeMonsterPartsFk->getMonsterCombinationWeaponDamageTypeMonsterPartFk() === $this) {
+                $sensitivityWeaponDamageTypeMonsterPartsFk->setMonsterCombinationWeaponDamageTypeMonsterPartFk(null);
+            }
+        }
 
         return $this;
     }

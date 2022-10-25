@@ -18,15 +18,12 @@ class MonsterPart
     #[ORM\Column(length: 25)]
     private ?string $name_monster_part = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $img_monster_part = null;
-
-    #[ORM\OneToMany(mappedBy: 'part_combination_weapon_damage_type_monster_part_fk', targetEntity: CombinationWeaponDamageTypeMonsterPart::class)]
-    private Collection $combination_weapon_damage_type_monster_parts_fk;
+    #[ORM\OneToMany(mappedBy: 'part_sensitivity_weapon_damage_type_monster_part_fk', targetEntity: SensitivityWeaponDamageTypeMonsterPart::class)]
+    private Collection $sensitivity_weapon_damage_type_monster_parts_fk;
 
     public function __construct()
     {
-        $this->combination_weapon_damage_type_monster_parts_fk = new ArrayCollection();
+        $this->sensitivity_weapon_damage_type_monster_parts_fk = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -46,42 +43,30 @@ class MonsterPart
         return $this;
     }
 
-    public function getImgMonsterPart(): ?string
-    {
-        return $this->img_monster_part;
-    }
-
-    public function setImgMonsterPart(string $img_monster_part): self
-    {
-        $this->img_monster_part = $img_monster_part;
-
-        return $this;
-    }
-
     /**
-     * @return Collection<int, CombinationWeaponDamageTypeMonsterPart>
+     * @return Collection<int, SensitivityWeaponDamageTypeMonsterPart>
      */
-    public function getCombinationWeaponDamageTypeMonsterPartsFk(): Collection
+    public function getSensitivityWeaponDamageTypeMonsterPartsFk(): Collection
     {
-        return $this->combination_weapon_damage_type_monster_parts_fk;
+        return $this->sensitivity_weapon_damage_type_monster_parts_fk;
     }
 
-    public function addCombinationWeaponDamageTypeMonsterPartFk(CombinationWeaponDamageTypeMonsterPart $combinationWeaponDamageTypeMonsterPart): self
+    public function addSensitivityWeaponDamageTypeMonsterPartFk(SensitivityWeaponDamageTypeMonsterPart $sensitivityWeaponDamageTypeMonsterPart): self
     {
-        if (!$this->combination_weapon_damage_type_monster_parts_fk->contains($combinationWeaponDamageTypeMonsterPart)) {
-            $this->combination_weapon_damage_type_monster_parts_fk->add($combinationWeaponDamageTypeMonsterPart);
-            $combinationWeaponDamageTypeMonsterPart->setPartCombinationWeaponDamageTypeMonsterPartFk($this);
+        if (!$this->sensitivity_weapon_damage_type_monster_parts_fk->contains($sensitivityWeaponDamageTypeMonsterPart)) {
+            $this->sensitivity_weapon_damage_type_monster_parts_fk->add($sensitivityWeaponDamageTypeMonsterPart);
+            $sensitivityWeaponDamageTypeMonsterPart->setPartSensitivityWeaponDamageTypeMonsterPartFk($this);
         }
 
         return $this;
     }
 
-    public function removeCombinationWeaponDamageTypeMonsterPartFk(CombinationWeaponDamageTypeMonsterPart $combinationWeaponDamageTypeMonsterPart): self
+    public function removeSensitivityWeaponDamageTypeMonsterPartFk(SensitivityWeaponDamageTypeMonsterPart $sensitivityWeaponDamageTypeMonsterPart): self
     {
-        if ($this->combination_weapon_damage_type_monster_parts_fk->removeElement($combinationWeaponDamageTypeMonsterPart)) {
+        if ($this->sensitivity_weapon_damage_type_monster_parts_fk->removeElement($sensitivityWeaponDamageTypeMonsterPart)) {
             // set the owning side to null (unless already changed)
-            if ($combinationWeaponDamageTypeMonsterPart->getPartCombinationWeaponDamageTypeMonsterPartFk() === $this) {
-                $combinationWeaponDamageTypeMonsterPart->setPartCombinationWeaponDamageTypeMonsterPartFk(null);
+            if ($sensitivityWeaponDamageTypeMonsterPart->getPartSensitivityWeaponDamageTypeMonsterPartFk() === $this) {
+                $sensitivityWeaponDamageTypeMonsterPart->setPartSensitivityWeaponDamageTypeMonsterPartFk(null);
             }
         }
 
