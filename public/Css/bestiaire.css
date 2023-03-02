@@ -1,0 +1,93 @@
+.index_UI {
+   display: flex;
+   flex-wrap: wrap;
+   justify-content: center;
+}
+
+/* ////// COLONNE DE FILTRES ////// */
+.filter_pannel {
+   border: 2px dotted black;
+   padding: 10px 0px 0px 0px;
+   display: flex;
+   flex-wrap: wrap;
+   flex-direction: column;
+   align-content: center;
+
+   width: 150px;
+   /* overflow-y: scroll; */
+}
+.filters {
+   display: flex;
+   align-items: center;
+   padding: 0px 5px;
+   height: 30px;
+}
+.filters_main {
+   border: 2px solid cyan;
+
+   width: 80%;
+}
+.filters_secondary {
+   border: 2px solid purple;
+
+   width: 69%;
+   position: relative;
+   left: 15px;
+   overflow-x: hidden;
+}
+
+/* ////// PANNEAU CENTRAL ////// */
+.central_pannel {
+   border: 2px dotted brown;
+   display: flex;
+   flex-wrap: wrap;
+   justify-content: center;
+
+   width: 70%;
+}
+
+/* PANNEAU CENTRAL GAUCHE - LISTE DE RESULTATS */
+.central_pannel_left_element_liste {
+   border: 2px solid blue;
+   display: flex;
+   flex-wrap: wrap;
+   justify-content: center;
+   align-content: flex-start;
+
+   width: 49%;
+}
+.element {
+   border: 2px solid green;
+
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+
+   width: 19%;
+   padding: 0.1em;
+}
+
+/* PANNEAU CENTRAL DROIT - INFOS ELEMENT */
+.central_pannel_right_element_infos {
+   border: 2px solid violet;
+
+   display: flex;
+   flex-wrap: wrap;
+
+   width: 49%;
+}
+.bandeau {
+   display: flex;
+   flex-wrap: wrap;
+}
+.img_elem_profil {border: 2px dotted violet;
+   height: 70px;
+   width: 15%;
+}
+.infos_majeur {border: 2px dotted violet;
+   height: 70px;
+   width: max-content;
+}
+.block_info {border: 2px dotted violet;
+   width: 100%;
+}

@@ -8,6 +8,7 @@ use App\Entity\MonsterSpecies;
 use App\Entity\Monster;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 
+
 class DataMonster extends Fixture implements DependentFixtureInterface
 {
     public function load(ObjectManager $manager): void
@@ -30,10 +31,10 @@ class DataMonster extends Fixture implements DependentFixtureInterface
                 $monster = new Monster();
                 $count++;
                 $monster->setNameMonster("Monstre n°$r")
-                    ->setImgMonster("../Asset/mhs2_monster_icon ($m).png")
+                    ->setImgMonster("./Asset/mhs2_monster_icon ($m).png")
                     ->setHatchingMonster($hatching)
                     ->setRetreatMonster($hatching === TRUE ? "Technique de retraite n°$m" : NULL)
-                    ->setEggImgMonster($hatching === TRUE ? "../Asset/egg ($e)" : NULL)
+                    ->setEggImgMonster($hatching === TRUE ? "./Asset/egg ($e)" : NULL)
                     ->setMonstieStatAttackLvl75Monster($hatching === TRUE ? mt_rand(45, 168) : NULL)
                     ->setSpeciesMonsterFk($species)
                     ->setElemStrengthMonsterFk($this->getReference("elem_" . mt_rand(1, 6)))

@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ controller_name }}{% endblock %}
+
+{% block body %}
+    {#<style>
+    
+    </style>#}
+
+    <h1>{{ controller_name }}</h1>
+
+    {########## CONTENEUR PRINCIPAL ###########}   
+    <div class="index_UI">
+        {########## PANNEAU LETERAL GAUCHE ###########}
+        <div class="filter_pannel">
+            <div class="filters filters_main">Filtre 1</div>
+            <div class="filters filters_secondary">Filtre 1A</div>
+            <div class="filters filters_secondary">Filtre 1B</div>
+            <div class="filters filters_secondary">Filtre 1C</div>
+            <div class="filters filters_secondary">Filtre 1D</div>
+            <div class="filters filters_main">Filtre 2</div>
+            <div class="filters filters_secondary">Filtre 2A</div>
+            <div class="filters filters_secondary">Filtre 2B</div>
+        </div>
+
+        {########## PANNEAU CENTRAL ###########}
+        <div class="central_pannel">
+            {# PANNEAU CENTRAL GAUCHE - LISTE D'ELEMENT #}
+            <div class="central_pannel_left_element_liste">
+                {% for monster in Monsters %}
+                        <img class="element" src="{{ monster.imgMonster }}" alt="{{ monster.nameMonster }}.icon">
+                {% endfor %}
+            </div>
+            {# PANNEAU CENTRAL DROIT - INFOS DE l'ELEMENT SELECTIONNE #}
+            <div class="central_pannel_right_element_infos">
+                <div class="bandeau">
+                    <div class="img_elem_profil">
+                        <img src="{{ Monsters[0].imgMonster }}" alt="icon">
+                    </div>
+                    <div class="infos_majeur">
+                        <div>Monster Name</div>                    
+                    </div>
+                </div>
+                
+                <div class="block_info"></div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
